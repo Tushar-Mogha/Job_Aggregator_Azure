@@ -1,0 +1,7 @@
+Packages used :
+1. selenium
+2. beautifulsoup4
+3. pandas
+4. ipywidgets
+5. voila
+6. azure-storage-blob
