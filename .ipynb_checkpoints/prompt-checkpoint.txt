@@ -1,0 +1,61 @@
+Updated Project Workflow
+1. User Interface
+Frontend: Jupyter Notebook with ipywidgets for user input (job/internship, location, category, filters).
+
+App Transformation: Turn notebook into a web app using Voilà, which displays only widgets and outputs (not code).
+
+2. User Input and Trigger
+User interacts with input widgets on the Voilà-powered app.
+
+Upon submission, user choices (type, location, category) are captured.
+
+3. Data Collection
+Web scraping module (e.g., scraper.py in src/) pulls jobs/internships live from Internshala (and others as added) based on user input.
+
+Raw scraped data is stored in data/raw/ for reproducibility if needed.
+
+4. Data Processing
+Data cleaning and formatting (via cleaner.py).
+
+Results are structured and optionally filtered/ranked.
+
+Processed datasets may be saved in data/processed/.
+
+5. Cloud Integration (Azure)
+Results and/or logs can be uploaded to Azure Storage (azure_upload.py or within storage.py).
+
+Azure authentication and DevOps can be set up if the app needs scaling or controlled user access.
+
+6. Output Visualization
+Cleaned results are displayed in a dynamic table or dashboard (output widget, pandas DataFrame display) in the Voilà app.
+
+Option for users to download/export results (e.g., CSV), stored locally or on Azure Blob.
+
+7. Hosting and Access
+Deploy Voilà app on Azure App Service (Free Tier) so others can access and use your job aggregator via the web.
+
+Requirements and configuration files (requirements.txt, config.py) ensure smooth deployment.
+
+Optionally, deploy a demo on Binder for easy sharing.
+
+8. Expansion Points
+Modular codebase allows adding more job boards/platforms.
+
+Automated Azure-based scheduling for background scraping (future scope).
+
+Logs, error handling, and analytics stored/reported via Azure or local files.
+
+Workflow Steps (Summary List)
+User Accesses Web App (hosted via Azure, powered by Voilà)
+
+Provides Search Criteria (interactive ipywidgets GUI)
+
+Scraper Collects Data (Internshala + more platforms)
+
+Cleaner Processes Results (standardizes output)
+
+Displays Output (dynamic, downloadable, shareable)
+
+(Optional) Uploads Data to Azure Storage
+
+Others Can Use the App Freely Online
