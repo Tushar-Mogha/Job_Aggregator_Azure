@@ -59,3 +59,144 @@ Displays Output (dynamic, downloadable, shareable)
 (Optional) Uploads Data to Azure Storage
 
 Others Can Use the App Freely Online
+
+
+------------------------------------------------------------------------------------------------------------
+
+🔄 Workflow Structure – Job Aggregator Web App
+1. Data Collection Layer (Scraping + API Calls)
+
+Files Involved: src/scraper.py, src/config.py
+
+Scrapes jobs from Internshala, Indeed, LinkedIn (if allowed), Naukri, etc.
+
+Scraping done with requests + BeautifulSoup (lightweight, free).
+
+Schedule scraping with cron job / Azure Function (free tier) → runs daily/weekly.
+
+Raw job postings saved in data/raw/ as JSON/CSV.
+
+✅ Value for SDE role: You’re implementing automated data pipelines.
+✅ Value for Analytics: You’re collecting real-world data at scale.
+
+2. Data Cleaning & Processing Layer
+
+Files Involved: src/cleaner.py, src/config.py
+
+Standardize job fields (title, company, location, salary, skills, posted date).
+
+Remove duplicates, expired jobs, and normalize skill keywords.
+
+Store processed jobs in data/processed/.
+
+✅ SDE: Handling messy real-world data → designing cleaning pipelines.
+✅ Analytics: Clean dataset ready for dashboards & insights.
+
+3. Data Storage Layer
+
+Files Involved: src/storage.py, src/azure_upload.py
+
+Store jobs in:
+
+Local SQLite (easy + free)
+
+OR Azure Table Storage / Azure Cosmos DB (free tier).
+
+Maintain “active jobs” list → compare with past runs → remove expired jobs.
+
+✅ SDE: Database management & consistency checks.
+✅ Analytics: Central source of truth for analysis.
+
+4. Analytics & Exploration Layer
+
+Files Involved: notebooks/exploration.ipynb
+
+Jupyter notebooks for:
+
+Salary trends by role/region.
+
+Demand analysis for skills (Python, SQL, Power BI, etc.).
+
+Company-wise job postings.
+
+Export charts to data/processed/plots/.
+
+✅ SDE: Shows ability to work with Jupyter + analytics pipelines.
+✅ Analytics: Demonstrates insights generation for business use.
+
+5. API Layer (Backend Service)
+
+Files Involved: src/api.py (new file)
+
+Flask/FastAPI backend that:
+
+Exposes jobs via /jobs endpoint.
+
+Allows filtering by skill, role, location, date.
+
+Runs locally or deployable on Azure App Service (free tier).
+
+✅ SDE: Real backend dev with REST APIs.
+✅ Analytics: Makes your processed data queryable.
+
+6. Frontend Layer (Simple, User-Friendly UI)
+
+Files Involved: frontend/ (new folder with app.py or streamlit_app.py)
+
+Use Streamlit (Python-only, no HTML/CSS needed).
+
+Features:
+
+Search/filter jobs.
+
+Show job postings in a card layout.
+
+Display charts (from analytics layer).
+
+✅ SDE: Shows ability to build full-stack apps with minimum web tech.
+✅ Analytics: Interactive dashboards for decision-making.
+
+7. Deployment Layer
+
+Azure Free Services:
+
+Scraper automation → Azure Function (timer trigger).
+
+Storage → Azure Table/Blob Storage.
+
+API/Frontend → Azure App Service (free tier).
+
+Local Option: Can run fully offline with SQLite + Streamlit.
+
+🗓️ Project Timeline (4 Weeks)
+Week 1: Core Data Pipeline
+
+Setup repo & file structure.
+
+Build scraper.py (Internshala first).
+
+Save raw job data → data/raw/.
+
+Week 2: Cleaning + Storage
+
+Implement cleaner.py.
+
+Create database schema (SQLite/Azure).
+
+Write storage.py to save jobs.
+
+Week 3: Analytics + API
+
+Build Jupyter notebook insights.
+
+Create /jobs API using FastAPI.
+
+Export plots from notebooks.
+
+Week 4: Frontend + Deployment
+
+Build Streamlit UI with filters & charts.
+
+Deploy scraper automation (Azure Function).
+
+Deploy frontend + backend on Azure App Service.
