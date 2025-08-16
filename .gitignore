@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 
 # Jupyter auto-saves
-.ipynb_checkpoints/
+src/.ipynb_checkpoints/
 
 # Environment files
 .env
