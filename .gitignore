@@ -1,4 +1,12 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter auto-saves
+.ipynb_checkpoints/
+
+# Environment files
 .env
-__pycache__/src/config.py
+
+# Config file (keep secret)
 src/config.py
-.env
