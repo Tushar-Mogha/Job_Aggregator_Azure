@@ -1,12 +1,21 @@
-# Python cache
+# Python compiled files
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Jupyter auto-saves
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
 src/.ipynb_checkpoints/
 
-# Environment files
+# Local configuration and secrets
 .env
-
-# Config file (keep secret)
 src/config.py
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other temp files
+*.log
